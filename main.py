@@ -1,5 +1,6 @@
 from src.auth import get_imgur_auth
 from src.folder import open_folder
+from src.matches import find_matches_in_files
 
 
 def main() -> None:
@@ -23,10 +24,19 @@ def main() -> None:
     path_input = open_folder()
     print(f"Selected folder: {path_input}")
 
-    ## scan every md file for imgur links
+    regex = r"https://i\.imgur\.com/\w+\.\w+"
 
-    ## compare detected imgur links from md files with with imgur api links
-    ## output imgur api links that are not in md files
+    # find all links in md files
+    found_links = find_matches_in_files(path_input, regex, ".md")
+
+    print(f"Found {len(found_links)} links in md files")
+    print(f"Found {len(image_links)} links in imgur api")
+
+    # Output Imgur api links that are not in md files
+    missing_links = set(image_links) - set(found_links)
+    print("Imgur links not found in any md file:")
+    for link in missing_links:
+        print(link)
 
 
 if __name__ == "__main__":

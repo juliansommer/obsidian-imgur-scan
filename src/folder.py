@@ -12,6 +12,7 @@ def open_folder() -> str:
         "-topmost", True
     )  # Opened window will be above all other windows even if clicked off
 
+    print("Select a folder")
     path_input = filedialog.askdirectory()
 
     # if you do not select a folder the first time, then select one, theres some error so just exit
