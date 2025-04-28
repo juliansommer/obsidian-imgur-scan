@@ -19,7 +19,7 @@ def get_imgur_auth() -> pyimgur.Imgur:
     # get authorization url
     # this will open a browser window for you to authorize the app
     auth_url = im.authorization_url("pin")
-    print("Go to the following url to authenticate with your app")
+    print("Go to the following url to authenticate with Imgur:")
     print(auth_url)
 
     pin = input("What is the pin? ")

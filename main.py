@@ -4,7 +4,7 @@ from src.matches import find_matches_in_files
 
 
 def main() -> None:
-    # get authenticated imgur object
+    # get authenticated Imgur object
     im = get_imgur_auth()
 
     user = im.get_user("me")
@@ -14,11 +14,11 @@ def main() -> None:
     # this 100 limit is enforced by the Imgur api, so we need to use the limit parameter to get all images
     images_objects = user.get_images(limit=1000)
 
-    image_links = []
+    image_links = set()
 
     # get all image links from the images object
     for image in images_objects:
-        image_links.append(image.link)
+        image_links.add(image.link)
 
     path_input = open_folder()
     print(f"Selected folder: {path_input}")
@@ -28,18 +28,24 @@ def main() -> None:
     # find all links in md files
     found_links = find_matches_in_files(path_input, regex, ".md")
 
-    print(f"Found {len(set(found_links))} links in files")
+    print(f"Found {len(found_links)} links in files")
     print(f"Found {len(image_links)} links in Imgur api")
 
-    # Output Imgur api links that are not in md files
-    missing_links = set(image_links) - set(found_links)
-
-    if not missing_links:
-        print("All Imgur links are found in files")
-    else:
-        print(f"Found {len(missing_links)} Imgur links not found in files")
+    # Output links in files that are not in Imgur api
+    missing_links = found_links - image_links
+    if missing_links:
+        print(f"Found {len(missing_links)} links in files that are not in Imgur api")
         for link in missing_links:
             print(link)
+
+    # Output Imgur api links that are not in files
+    missing_links2 = image_links - found_links
+    if missing_links2:
+        print(f"Found {len(missing_links2)} Imgur links not found in files")
+        for link in missing_links2:
+            print(link)
+    else:
+        print("All Imgur links are found in files")
 
 
 if __name__ == "__main__":

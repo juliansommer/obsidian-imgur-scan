@@ -4,6 +4,9 @@ from tkinter import filedialog
 
 
 def open_folder() -> str:
+    """
+    Open a folder dialog and return the selected folder path.
+    """
     windll.shcore.SetProcessDpiAwareness(1)  # fixes the blurry file dialog
 
     root = tk.Tk()
