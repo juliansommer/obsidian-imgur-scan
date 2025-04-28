@@ -1,6 +1,6 @@
 # Obsidian Imgur Scan
 
-- Scan obsidian notebook for Imgur urls, and output which Imgur urls aren't used in the notebook
+- Scan obsidian notebook for Imgur urls, and find which Imgur urls aren't used in the notebook
 
 ## Setup
 
