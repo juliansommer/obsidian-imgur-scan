@@ -2,6 +2,10 @@
 
 Scan an Obsidian notebook for Imgur URLs, and find which Imgur URLs aren't used in the notebook
 
+## Note
+
+As of July 2025, Imgur has discontinued its public API, which means this tool will no longer function. It isn't possible to create a client, or authorize an app to access Imgur's resources. This project is archived and will not receive further updates.
+
 ## Setup
 
 Follow these steps to run the project locally.
